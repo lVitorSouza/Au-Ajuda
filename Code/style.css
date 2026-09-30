@@ -77,11 +77,13 @@ button:focus-visible,
 
 .sidebar-brand h2 {
     font-size: 1.5rem;
+    color: #ffffff; /* Garante que o Au Ajuda do menu lateral também seja branco */
 }
 
 .sidebar-brand p {
     font-size: 0.8rem;
     opacity: 0.9;
+    color: #ffffff;
 }
 
 .side-menu {
@@ -120,7 +122,7 @@ button:focus-visible,
     justify-content: space-between;
     align-items: center;
     padding: 12px 16px;
-   background: linear-gradient(180deg, #034C8C, #03588C);
+    background: linear-gradient(180deg, #034C8C, #03588C);
     border-radius: 16px;
     margin-bottom: 18px;
     box-shadow: var(--card-shadow);
@@ -132,6 +134,10 @@ button:focus-visible,
     gap: 15px;
 }
 
+.logo-area h1 {
+    color: #ffffff; /* Torna o "Au Ajuda" acima do botão Mapa da Unidade branco */
+}
+
 .logo {
     width: 80px;
     border-radius: 16px;
@@ -139,7 +145,7 @@ button:focus-visible,
 
 .slogan {
     font-style: italic;
-    color: #ffffff;
+    color: #ffffff; /* Slogan branco */
 }
 
 .main-nav {
@@ -171,7 +177,7 @@ button:focus-visible,
     padding: 22px;
     position: relative;
     overflow-y: auto;
-    box-shadow: var(--card-shadow), black
+    box-shadow: var(--card-shadow), black;
 }
 
 .screen {
