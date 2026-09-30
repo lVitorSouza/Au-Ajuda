@@ -11,30 +11,32 @@ let currentZoom = 1;
 let touchStartX = 0;
 let touchStartY = 0;
 
-// === BANCO DE DADOS DOS LOCAIS (Para gerar páginas dinâmicas) ===
+// === BANCO DE DADOS DOS LOCAIS (Para as Imagens) ===
 const locationDB = {
     "laboratorio de optica": {
         title: "Laboratório de Óptica",
-        thumb: "assets/images/thumb_optica.svg",
-        desc: "Vídeo do caminho para o Laboratório de Óptica."
+        thumb: "https://placehold.co/300x200/d89b2f/white?text=Thumb+Optica",
+        image: "https://placehold.co/800x450/034C8C/white?text=Caminho:+Laboratorio+de+Optica",
+        desc: "Imagem do caminho para o Laboratório de Óptica."
     },
-    "espaço de convivência": {
+    "espaço de convivencia": {
         title: "Espaço de Convivência",
-        thumb: "assets/images/thumb_convivencia.svg",
-        desc: "Vídeo do caminho até o Espaço de Convivência."
+        thumb: "https://placehold.co/300x200/d89b2f/white?text=Thumb+Convivencia",
+        image: "https://placehold.co/800x450/034C8C/white?text=Caminho:+Espaco+de+Convivencia",
+        desc: "Imagem do caminho até o Espaço de Convivência."
     },
     "biblioteca": {
         title: "Biblioteca",
-        thumb: "assets/images/thumb_biblioteca.svg",
-        desc: "Vídeo do caminho até a Biblioteca."
+        thumb: "https://placehold.co/300x200/d89b2f/white?text=Thumb+Biblioteca",
+        image: "https://placehold.co/800x450/034C8C/white?text=Caminho:+Biblioteca",
+        desc: "Imagem do caminho até a Biblioteca."
     },
     "banheiro masculino e feminino": {
         title: "Banheiros (Fem/Masc)",
-        thumb: "assets/images/thumb_banheiros.svg",
-        desc: "Vídeo indicando os Banheiros do Térreo."
-    },
-    
-    // NOTA: Você pode adicionar todos os locais aqui conforme for criando os vídeos reais!
+        thumb: "https://placehold.co/300x200/d89b2f/white?text=Thumb+Banheiros",
+        image: "https://placehold.co/800x450/034C8C/white?text=Caminho:+Banheiros",
+        desc: "Imagem indicando os Banheiros do Térreo."
+    }
 };
 
 function setLocationHint(message) {
@@ -64,7 +66,6 @@ function goTo(screenId) {
     const targetScreen = document.getElementById(screenId);
     if (!targetScreen) return;
 
-    // Se estiver saindo de uma tela de andar para o vídeo, guarda o andar!
     if (screenId === 'video' && currentScreen !== 'video') {
         previousScreen = currentScreen;
     }
@@ -93,35 +94,61 @@ function goTo(screenId) {
     resetZoom();
 }
 
-// === FUNÇÃO NOVA QUE MUDA A TELA DEPENDENDO DE ONDE CLICOU ===
-function showVideo(locationID, locationName) {
-    playTalkback(`Mostrando como chegar em ${locationName}`);
-    
-    // Procura no banco de dados. Se não achar, usa um "padrão genérico" provisório.
+// === NOVA FUNÇÃO MISTA (Renderiza IMAGEM ou VÍDEO dependendo do botão clicado) ===
+function showMedia(locationID, locationName) {
     const key = locationID.toLowerCase();
-    const data = locationDB[key] || {
-        title: locationName, // Usa o nome real do botão clicado!
-        thumb: "assets/images/placeholder_mapa.svg",
-        video: "assets/videos/video_tutorial.mp4",
-        desc: `Vídeo indicando o caminho para: ${locationName}`
-    };
-
-    // Atualiza o HTML dinamicamente com os dados novos
-    document.getElementById('video-titulo-local').textContent = `Como chegar: ${data.title}`;
-    document.getElementById('video-desc').textContent = data.desc;
     
-    const videoThumb = document.getElementById('video-thumb');
-    const videoPlayer = document.getElementById('video-player');
-    const videoSource = document.getElementById('video-source');
+    // Verifica se a intenção do botão é abrir um vídeo 
+    // Ex: "Vídeo Térreo", "video", "Vídeo 1° Andar"
+    const isVideo = key.includes('vídeo') || key.includes('video');
 
-    videoThumb.src = data.thumb;
-    videoPlayer.poster = data.thumb;
-    videoSource.src = data.video;
+    playTalkback(`Mostrando ${isVideo ? 'vídeo' : 'imagem'} para ${locationName}`);
+    
+    const titleEl = document.getElementById('video-titulo-local');
+    const descEl = document.getElementById('video-desc');
+    const thumbEl = document.getElementById('video-thumb');
+    const mediaContainer = document.querySelector('.media-video-item');
 
-    // Recarrega o player de vídeo para aceitar o arquivo novo
-    videoPlayer.load();
+    if (isVideo) {
+        // --- LÓGICA PARA EXIBIR VÍDEO ---
+        const videoSrc = "assets/videos/video_tutorial.mp4"; // Seu arquivo original
+        const thumbSrc = `https://placehold.co/300x200/d89b2f/white?text=Capa+${encodeURIComponent(locationName)}`;
 
-    // Navega para a tela de vídeos adaptada
+        if (titleEl) titleEl.textContent = locationName;
+        if (descEl) descEl.textContent = `Assista ao vídeo para chegar ao seu destino.`;
+        if (thumbEl) thumbEl.src = thumbSrc;
+
+        if (mediaContainer) {
+            mediaContainer.innerHTML = `
+                <video id="video-player" controls preload="metadata" poster="${thumbSrc}" style="width: 100%; border-radius: 10px; object-fit: cover;">
+                    <source id="video-source" src="${videoSrc}" type="video/mp4">
+                    Seu navegador não suporta vídeos em HTML5.
+                </video>
+            `;
+        }
+    } else {
+        // --- LÓGICA PARA EXIBIR IMAGEM VIA API ---
+        const data = locationDB[key] || {
+            title: locationName, 
+            thumb: `https://placehold.co/300x200/f3c06d/white?text=Thumb+${encodeURIComponent(locationName)}`,
+            image: `https://placehold.co/800x450/d89b2f/white?text=Caminho:+${encodeURIComponent(locationName)}`,
+            desc: `Imagem indicando o caminho para: ${locationName}`
+        };
+
+        if (titleEl) titleEl.textContent = `Como chegar: ${data.title}`;
+        if (descEl) descEl.textContent = data.desc;
+        if (thumbEl) thumbEl.src = data.thumb;
+
+        if (mediaContainer) {
+            mediaContainer.innerHTML = `
+                <img id="image-player" 
+                     src="${data.image}" 
+                     alt="${data.desc}" 
+                     style="width: 100%; border-radius: 10px; object-fit: cover;">
+            `;
+        }
+    }
+
     goTo('video');
 }
 
@@ -154,20 +181,19 @@ function bindEvents() {
     document.querySelectorAll('.location-card[data-location]').forEach((button) => {
         button.addEventListener('click', () => {
             const locationID = button.dataset.location; 
-            const locationName = button.textContent.trim(); // Pega o nome visível do botão
+            const locationName = button.textContent.trim();
             
             setLocationHint(`Você selecionou ${locationName}.`);
-            
-            // Chama a função passando a ID e o Nome
-            showVideo(locationID, locationName);
+            // Chama a nova função híbrida (imagem ou vídeo)
+            showMedia(locationID, locationName);
         });
     });
 
-    // Botão Voltar da tela de vídeo
+    // Botão Voltar da tela de visualização
     const btnVoltarAndar = document.getElementById('btn-voltar-andar');
     if (btnVoltarAndar) {
         btnVoltarAndar.addEventListener('click', () => {
-            goTo(previousScreen); // Volta pro andar que ele estava!
+            goTo(previousScreen); 
         });
     }
 
@@ -190,13 +216,18 @@ function bindEvents() {
         });
     }
 
+    // Adaptado para tocar vídeo ou rolar até a imagem
     const videoThumbContainer = document.getElementById('video-thumb-container');
     if (videoThumbContainer) {
         videoThumbContainer.addEventListener('click', () => {
-            const video = document.getElementById('video-player');
-            if (video) {
-                video.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                video.play().catch(() => {});
+            const videoPlayer = document.getElementById('video-player');
+            const imagePlayer = document.getElementById('image-player');
+            
+            if (videoPlayer) {
+                videoPlayer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                videoPlayer.play().catch(() => {});
+            } else if (imagePlayer) {
+                imagePlayer.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         });
     }
