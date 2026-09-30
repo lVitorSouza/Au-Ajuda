@@ -21,8 +21,9 @@ const locationDB = {
     },
     "espaço de convivencia": {
         title: "Espaço de Convivência",
-        thumb: "https://placehold.co/300x200/d89b2f/white?text=Thumb+Convivencia",
-        image: "https://placehold.co/800x450/034C8C/white?text=Caminho:+Espaco+de+Convivencia",
+        thumb: "https://i.postimg.cc/pVf9bBfD/IMG-2863.jpg",
+        image: "https://i.postimg.cc/qBstVGs2/IMG-2862.jpg",
+        image: "https://i.postimg.cc/pVf9bBfD/IMG-2863.jpg",
         desc: "Imagem do caminho até o Espaço de Convivência."
     },
     "biblioteca": {
