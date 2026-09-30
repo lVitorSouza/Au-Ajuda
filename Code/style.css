@@ -4,7 +4,7 @@
     --brand-light: #F2B47E;
     --brand-yellow: #F2B47E;
     --brand-dark: #034C8C;
-    --text-dark: #333;
+    --text-dark: #000000;
     --card-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
@@ -21,7 +21,7 @@ html, body {
 
 body {
     background-color: var(--bg-primary);
-    color: var(--text-dark);
+    color: #000000;
     overflow: hidden;
     touch-action: manipulation;
 }
@@ -166,12 +166,12 @@ button:focus-visible,
 
 .content-area {
     flex: 1;
-    background-color: white;
+    background-color: rgb(249, 249, 249);
     border-radius: 18px;
     padding: 22px;
     position: relative;
     overflow-y: auto;
-    box-shadow: var(--card-shadow);
+    box-shadow: var(--card-shadow), black
 }
 
 .screen {
