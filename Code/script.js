@@ -6,12 +6,12 @@ const mainImage = document.getElementById('main-image');
 const locationHint = document.getElementById('location-hint');
 
 let currentScreen = 'home';
-let previousScreen = 'mapa'; // Guarda de onde o usuário veio
+let previousScreen = 'mapa'; 
 let currentZoom = 1;
 let touchStartX = 0;
 let touchStartY = 0;
 
-// === BANCO DE DADOS DOS LOCAIS (Para as Imagens) ===
+// Banco de dados para exibir a API de imagens nos locais comuns
 const locationDB = {
     "laboratorio de optica": {
         title: "Laboratório de Óptica",
@@ -94,12 +94,9 @@ function goTo(screenId) {
     resetZoom();
 }
 
-// === NOVA FUNÇÃO MISTA (Renderiza IMAGEM ou VÍDEO dependendo do botão clicado) ===
+// Função inteligente: Mantém vídeos para cards de vídeo e usa API de imagem para os demais
 function showMedia(locationID, locationName) {
     const key = locationID.toLowerCase();
-    
-    // Verifica se a intenção do botão é abrir um vídeo 
-    // Ex: "Vídeo Térreo", "video", "Vídeo 1° Andar"
     const isVideo = key.includes('vídeo') || key.includes('video');
 
     playTalkback(`Mostrando ${isVideo ? 'vídeo' : 'imagem'} para ${locationName}`);
@@ -110,8 +107,7 @@ function showMedia(locationID, locationName) {
     const mediaContainer = document.querySelector('.media-video-item');
 
     if (isVideo) {
-        // --- LÓGICA PARA EXIBIR VÍDEO ---
-        const videoSrc = "assets/videos/video_tutorial.mp4"; // Seu arquivo original
+        const videoSrc = "assets/videos/video_tutorial.mp4";
         const thumbSrc = `https://placehold.co/300x200/d89b2f/white?text=Capa+${encodeURIComponent(locationName)}`;
 
         if (titleEl) titleEl.textContent = locationName;
@@ -127,7 +123,6 @@ function showMedia(locationID, locationName) {
             `;
         }
     } else {
-        // --- LÓGICA PARA EXIBIR IMAGEM VIA API ---
         const data = locationDB[key] || {
             title: locationName, 
             thumb: `https://placehold.co/300x200/f3c06d/white?text=Thumb+${encodeURIComponent(locationName)}`,
@@ -177,19 +172,16 @@ function bindEvents() {
         });
     });
 
-    // Clique em qualquer Local/Card de Andar
     document.querySelectorAll('.location-card[data-location]').forEach((button) => {
         button.addEventListener('click', () => {
             const locationID = button.dataset.location; 
             const locationName = button.textContent.trim();
             
             setLocationHint(`Você selecionou ${locationName}.`);
-            // Chama a nova função híbrida (imagem ou vídeo)
             showMedia(locationID, locationName);
         });
     });
 
-    // Botão Voltar da tela de visualização
     const btnVoltarAndar = document.getElementById('btn-voltar-andar');
     if (btnVoltarAndar) {
         btnVoltarAndar.addEventListener('click', () => {
@@ -216,7 +208,6 @@ function bindEvents() {
         });
     }
 
-    // Adaptado para tocar vídeo ou rolar até a imagem
     const videoThumbContainer = document.getElementById('video-thumb-container');
     if (videoThumbContainer) {
         videoThumbContainer.addEventListener('click', () => {
@@ -233,27 +224,30 @@ function bindEvents() {
     }
 }
 
-document.addEventListener('touchstart', (event) => {
-    const touch = event.touches[0];
-    if (touch) {
-        touchStartX = touch.clientX;
-        touchStartY = touch.clientY;
-    }
-}, { passive: true });
-
-document.addEventListener('touchend', (event) => {
-    const changedTouch = event.changedTouches[0];
-    if (!changedTouch) return;
-    const dx = changedTouch.clientX - touchStartX;
-    const dy = changedTouch.clientY - touchStartY;
-
-    if (Math.abs(dx) > 100 && Math.abs(dy) < 50) {
-        if (dx < 0) playTalkback('Deslizando para o próximo item');
-        else playTalkback('Deslizando para o item anterior');
-    }
-});
-
+// Controle do Menu Mobile (Hambúrguer)
 document.addEventListener('DOMContentLoaded', () => {
     bindEvents();
     goTo('home');
+
+    const sidebar = document.querySelector('.sidebar');
+    const btnMobileMenu = document.getElementById('btn-mobile-menu');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+    function toggleMenu() {
+        if(sidebar && sidebarOverlay) {
+            sidebar.classList.toggle('open');
+            sidebarOverlay.classList.toggle('active');
+        }
+    }
+
+    if (btnMobileMenu) btnMobileMenu.addEventListener('click', toggleMenu);
+    if (sidebarOverlay) sidebarOverlay.addEventListener('click', toggleMenu);
+
+    document.querySelectorAll('.side-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
+                toggleMenu();
+            }
+        });
+    });
 });

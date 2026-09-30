@@ -7,19 +7,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <body>
-    <!-- ADICIONE ESTA LINHA AQUI -->
+    <!-- Camada escura de fundo para o menu mobile -->
     <div class="sidebar-overlay" id="sidebar-overlay"></div>
-    
-    <div class="app-shell">
-        <!-- Seu menu lateral continua igual... -->
-         
+
     <div class="app-shell">
         <aside class="sidebar" aria-label="Menu lateral principal">
             <div class="sidebar-brand">
-                <!-- Imagem online: Logo da barra lateral -->
-                <img src="https://i.postimg.cc/VL0bkVTS/logo-png.jpg" alt="https://i.postimg.cc/VL0bkVTS/logo-png.jpg" class="sidebar-logo">
+                <img src="https://i.postimg.cc/VL0bkVTS/logo-png.jpg" alt="Logo Au Ajuda" class="sidebar-logo">
                 <div>
                     <h2>Au Ajuda</h2>
                     <p>Conectando sem Barreiras</p>
@@ -33,19 +27,26 @@
                 <button type="button" class="side-btn" data-target="andar1">1º Andar</button>
                 <button type="button" class="side-btn" data-target="andar2">2º Andar</button>
                 <button type="button" class="side-btn" data-target="andar3">3º Andar</button>
+                <button type="button" class="side-btn" data-target="video">Vídeos</button>
             </nav>
         </aside>
 
         <div class="app-container">
             <header class="header">
                 <div class="logo-area">
-                    <!-- Imagem online: Logo do Cabeçalho -->
                     <img src="https://i.postimg.cc/VL0bkVTS/logo-png.jpg" alt="Logotipo do sistema Au Ajuda" class="logo">
                     <div>
                         <h1>Au Ajuda</h1>
                         <p class="slogan">Conectando sem Barreiras</p>
                     </div>
                 </div>
+
+                <!-- Botão de menu hambúrguer para celular -->
+                <button class="mobile-menu-toggle" id="btn-mobile-menu" aria-label="Abrir menu">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="white">
+                        <path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/>
+                    </svg>
+                </button>
 
                 <div class="acessibility-controls" aria-label="Controles de acessibilidade">
                     <button id="btn-zoom-in" aria-label="Aumentar fonte">A+</button>
@@ -68,7 +69,6 @@
                     </div>
 
                     <div class="syntactic-image-container">
-                        <!-- Imagem online: Fachada Genérica (Substitui o mapa principal) -->
                         <img src="https://www.pr.senac.br/faculdade/images/londrina_centro.jpg" alt="Imagem sintática do prédio" id="main-image">
                         <div class="zoom-controls">
                             <button type="button" data-zoom="1.2" aria-label="Ampliar imagem">Ampliar</button>
@@ -110,10 +110,9 @@
                         <button type="button" class="location-card" data-location="laboratorio de optica">Lab. de Óptica</button>
                         <button type="button" class="location-card" data-location="estacionamento inferior">Estacionamento Inferior</button>
                         <button type="button" class="location-card" data-location="estacionamento superior">Estacionamento Superior</button> 
-                         <button type="button" class="location-card" data-location="sala de reunioes">Sala de Reuniões</button> 
-                              <button type="button" class="location-card" data-location="sala de equipe tecnica">Sala de Equipe Técnica</button> 
-                               <button type="button" class="location-card" data-location="Vídeo Térreo">Vídeo Térreo</button>
-
+                        <button type="button" class="location-card" data-location="sala de reunioes">Sala de Reuniões</button> 
+                        <button type="button" class="location-card" data-location="sala de equipe tecnica">Sala de Equipe Técnica</button> 
+                        <button type="button" class="location-card" data-location="Vídeo Térreo">Vídeo Térreo</button>
                     </div>
                     <button type="button" class="secondary-btn" data-target="mapa">Voltar ao Mapa</button>
                 </section>
@@ -138,7 +137,7 @@
                         <button type="button" class="location-card" data-location="sala de aula">Sala de Aula</button>
                         <button type="button" class="location-card" data-location="bebedouro">Bebedouro</button>
                         <button type="button" class="location-card" data-location="banheiro">Banheiro Masculino</button>
-                         <button type="button" class="location-card" data-location="Vídeo 2° Andar">Vídeo 2° Andar</button>
+                        <button type="button" class="location-card" data-location="Vídeo 2° Andar">Vídeo 2° Andar</button>
                     </div>
                     <button type="button" class="secondary-btn" data-target="mapa">Voltar ao Mapa</button>
                 </section>
@@ -152,7 +151,7 @@
                         <button type="button" class="location-card" data-location="auditório">Auditório</button>
                         <button type="button" class="location-card" data-location="banheiro feminino ">Banheiro Feminino</button>
                         <button type="button" class="location-card" data-location="bebedouro">Bebedouro</button>
-                         <button type="button" class="location-card" data-location="Vídeo 3° Andar">Vídeo 3° Andar</button>
+                        <button type="button" class="location-card" data-location="Vídeo 3° Andar">Vídeo 3° Andar</button>
                     </div>
                     <button type="button" class="secondary-btn" data-target="mapa">Voltar ao Mapa</button>
                 </section>
@@ -164,13 +163,11 @@
                     
                     <div class="media-gallery">
                         <div class="media-item" id="video-thumb-container" tabindex="0" role="button" aria-label="Assistir vídeo do local">
-                            <!-- Imagem online: Miniatura de Vídeo -->
                             <img id="video-thumb" src="https://placehold.co/300x200/f3c06d/white?text=Capa+do+Video" alt="Miniatura do vídeo">
                             <p id="video-desc">Vídeo: Recepção</p>
                         </div>
 
                         <div class="media-item media-video-item">
-                            <!-- O vídeo falhará se não existir localmente, mas não quebra o layout -->
                             <video id="video-player" controls preload="metadata" poster="https://placehold.co/300x200/f3c06d/white?text=Capa+do+Video">
                                 <source id="video-source" src="assets/videos/video_tutorial.mp4" type="video/mp4">
                                 Seu navegador não suporta vídeos em HTML5.
@@ -182,7 +179,6 @@
             </main>
 
             <aside class="libras-assistant" id="libras-assistant" aria-label="Assistente de Libras">
-                <!-- Imagem online: Assistente de Libras -->
                 <img src="https://placehold.co/100x100/bb8d40/white?text=Libras" alt="Assistente de Libras" id="libras-image">
             </aside>
 

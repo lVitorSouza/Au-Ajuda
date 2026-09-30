@@ -77,7 +77,7 @@ button:focus-visible,
 
 .sidebar-brand h2 {
     font-size: 1.5rem;
-    color: #ffffff; /* Garante que o Au Ajuda do menu lateral também seja branco */
+    color: #ffffff;
 }
 
 .sidebar-brand p {
@@ -135,7 +135,7 @@ button:focus-visible,
 }
 
 .logo-area h1 {
-    color: #ffffff; /* Torna o "Au Ajuda" acima do botão Mapa da Unidade branco */
+    color: #ffffff;
 }
 
 .logo {
@@ -145,7 +145,7 @@ button:focus-visible,
 
 .slogan {
     font-style: italic;
-    color: #ffffff; /* Slogan branco */
+    color: #ffffff;
 }
 
 .main-nav {
@@ -344,44 +344,113 @@ button:focus-visible,
     color: var(--text-dark);
 }
 
-@media (max-width: 640px) {
+/* === ESTILOS RESPONSIVOS PARA MOBILE (Android e iOS) === */
+.mobile-menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1500;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
     .app-shell {
-        flex-direction: column;
+        display: block;
     }
 
     .sidebar {
-        width: 100%;
-        padding: 16px;
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 280px;
+        height: 100vh;
+        z-index: 2000;
+        transition: left 0.3s ease;
+        border-radius: 0 16px 16px 0;
     }
 
-    .side-menu {
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-
-    .side-btn {
-        width: auto;
-        flex: 1 1 120px;
+    .sidebar.open {
+        left: 0;
     }
 
     .app-container {
-        padding: 12px;
+        padding: 16px;
+        height: 100vh;
+        overflow-y: auto;
     }
 
     .header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
+        position: relative;
+        flex-wrap: wrap;
+        margin-bottom: 60px;
+        padding: 12px;
+        align-items: center;
+    }
+
+    .logo-area {
+        flex: 1;
+    }
+
+    .logo {
+        width: 55px;
+    }
+
+    .logo-area h1 { font-size: 1.4rem; }
+    .logo-area p { font-size: 0.8rem; }
+
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .acessibility-controls {
+        position: absolute;
+        bottom: -45px;
+        right: 0px;
     }
 
     .main-nav {
         flex-direction: column;
+        margin-bottom: 16px;
     }
 
-    .nav-btn,
-    .location-card,
-    .secondary-btn {
+    .nav-btn, .location-card, .secondary-btn {
         width: 100%;
+        padding: 14px;
+    }
+
+    .content-area {
+        padding: 16px;
+        min-height: auto;
+        overflow: visible;
+        box-shadow: none;
+        background: transparent;
+    }
+
+    .syntactic-image-container {
+        height: 220px;
+        min-height: auto;
+    }
+
+    .libras-assistant {
+        width: 75px;
+        height: 75px;
+        bottom: 20px;
+        right: 20px;
     }
 }
 
@@ -392,7 +461,6 @@ button:focus-visible,
     transition: opacity 0.3s ease-in-out;
 }
 
-/* Mostra apenas a tela ativa de forma suave */
 .screen.active {
     display: block;
     opacity: 1;
