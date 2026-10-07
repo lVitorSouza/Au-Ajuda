@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Au Ajuda - Conectando sem Barreiras</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Camada escura de fundo para o menu mobile -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <div class="app-shell">
+        <aside class="sidebar" aria-label="Menu lateral principal">
+            <div class="sidebar-brand">
+                <img src="https://i.postimg.cc/BvcqwJPT/logo-png.jpg" alt="Logo Au Ajuda" class="sidebar-logo">
+                <div>
+                    <h2>Au Ajuda</h2>
+                    <p>Conectando sem Barreiras</p>
+                </div>
+            </div>
+
+            <nav class="side-menu" aria-label="Menu lateral">
+                <button type="button" class="side-btn active" data-target="home">Início</button>
+                <button type="button" class="side-btn" data-target="mapa">Mapa da Unidade</button>
+                <button type="button" class="side-btn" data-target="térreo">Térreo</button>
+                <button type="button" class="side-btn" data-target="andar1">1º Andar</button>
+                <button type="button" class="side-btn" data-target="andar2">2º Andar</button>
+                <button type="button" class="side-btn" data-target="andar3">3º Andar</button>
+            </nav>
+        </aside>
+
+        <div class="app-container">
+            <header class="header">
+                <div class="logo-area">
+                    <img src="https://i.postimg.cc/BvcqwJPT/logo-png.jpg" alt="Logotipo do sistema Au Ajuda" class="logo">
+                    <div>
+                        <h1>Au Ajuda</h1>
+                        <p class="slogan">Conectando sem Barreiras</p>
+                    </div>
+                </div>
+
+                <!-- Botão de menu hambúrguer para celular -->
+                <button class="mobile-menu-toggle" id="btn-mobile-menu" aria-label="Abrir menu">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="white">
+                        <path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/>
+                    </svg>
+                </button>
+
+                <div class="acessibility-controls" aria-label="Controles de acessibilidade">
+                    <button id="btn-zoom-in" aria-label="Aumentar fonte">A+</button>
+                    <button id="btn-zoom-out" aria-label="Diminuir fonte">A-</button>
+                </div>
+            </header>
+
+            <nav class="main-nav" aria-label="Navegação principal">
+                <button type="button" class="nav-btn" data-target="mapa">Mapa da Unidade</button>
+            </nav>
+
+            <main id="content-area" class="content-area" aria-live="polite">
+                <!-- INÍCIO -->
+                <section id="home" class="screen active" aria-label="Tela inicial">
+                    <h2>Bem-vindo ao Senac!</h2>
+                    <p>Toque nos botões acima para navegar ou deslize para os lados.</p>
+
+                    <div class="info-banner">
+                        <strong>Dica:</strong> use a navegação por andares para encontrar a recepção, banheiros, salas e atendimento mais rápido.
+                    </div>
+
+                    <div class="syntactic-image-container">
+                        <img src="https://www.pr.senac.br/faculdade/images/londrina_centro.jpg" alt="Imagem sintática do prédio" id="main-image">
+                        <div class="zoom-controls">
+                            <button type="button" data-zoom="1.2" aria-label="Ampliar imagem">Ampliar</button>
+                            <button type="button" data-zoom="0.8" aria-label="Reduzir imagem">Reduzir</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MAPA -->
+                <section id="mapa" class="screen" aria-label="Mapa da unidade">
+                    <h2>Mapa da Unidade</h2>
+                    <p>Selecione um andar para mais detalhes.</p>
+                    <div class="floor-grid">
+                        <button type="button" class="location-card" data-target="térreo">Térreo</button>
+                        <button type="button" class="location-card" data-target="andar1">1º Andar</button>
+                        <button type="button" class="location-card" data-target="andar2">2º Andar</button>
+                        <button type="button" class="location-card" data-target="andar3">3º Andar</button>
+                    </div>
+
+                    <div id="location-hint" class="location-hint" aria-live="polite">
+                        Escolha um andar para ver onde encontrar recepção, salas e apoio.
+                    </div>
+                </section>
+
+                <!-- TÉRREO -->
+                <section id="térreo" class="screen" aria-label="Térreo">
+                    <h2>Térreo</h2>
+                    <p>Você está no Térreo, onde ir?</p>
+                    <div class="location-options">
+                        <button type="button" class="location-card" data-location="espaço de convivencia">Espaço de Convivência</button>
+                        <button type="button" class="location-card" data-location="central de informacoes e matriculas">Central de Informações</button>
+                        <button type="button" class="location-card" data-location="cantina">Cantina</button>
+                        <button type="button" class="location-card" data-location="biblioteca">Biblioteca</button>
+                        <button type="button" class="location-card" data-location="banheiro masculino e feminino">Banheiro Fem/Masc</button>
+                        <button type="button" class="location-card" data-location="salao de beleza">Salão de Beleza</button>
+                        <button type="button" class="location-card" data-location="cozinhaescola">Cozinha Escola</button>
+                        <button type="button" class="location-card" data-location="laboratorio de optica">Lab. de Óptica</button>
+                        <button type="button" class="location-card" data-location="estacionamento inferior">Estacionamento Inferior</button>
+                        <button type="button" class="location-card" data-location="estacionamento superior">Estacionamento Superior</button> 
+                        <button type="button" class="location-card" data-location="sala de reunioes">Sala de Reuniões</button> 
+                    </div>
+                    
+                    <!-- LINHA ESPECÍFICA PARA VÍDEO MP4 -->
+                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
+                        <button type="button" class="location-card" data-location="vídeo térreo" style="width: 100%; background-color: var(--brand-dark);">Assistir Vídeo MP4 do Térreo</button>
+                    </div>
+                    
+                    <button type="button" class="secondary-btn" data-target="mapa">Voltar ao Mapa</button>
+                </section>
+
+                <!-- 1º ANDAR -->
+                <section id="andar1" class="screen" aria-label="Primeiro andar">
+                    <h2>1º Andar</h2>
+                    <p>Salas de aula e outras dependências.</p>
+                    <div class="location-options">
+                        <button type="button" class="location-card" data-location="salas de aula">Salas de Aula</button>
+                    </div>
+
+                    <!-- LINHA ESPECÍFICA PARA VÍDEO MP4 -->
+                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
+                        <button type="button" class="location-card" data-location="vídeo 1° andar" style="width: 100%; background-color: var(--brand-dark);">Assistir Vídeo MP4 do 1º Andar</button>
+                    </div>
+
+                    <button type="button" class="secondary-btn" data-target="mapa">Voltar ao Mapa</button>
+                </section>
+
+                <!-- 2º ANDAR -->
+                <section id="andar2" class="screen" aria-label="Segundo andar">
+                    <h2>2º Andar</h2>
+                    <p>Você pode encontrar Salas de aula, Bebedouros e Banheiro Masculino.</p>
+                    <div class="location-options">
+                        <button type="button" class="location-card" data-location="sala de aula">Sala de Aula</button>
+                    </div>
+
+                    <!-- LINHA ESPECÍFICA PARA VÍDEO MP4 -->
+                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
+                        <button type="button" class="location-card" data-location="vídeo 2° andar" style="width: 100%; background-color: var(--brand-dark);">Assistir Vídeo MP4 do 2º Andar</button>
+                    </div>
+
+                    <button type="button" class="secondary-btn" data-target="mapa">Voltar ao Mapa</button>
+                </section>
+
+                <!-- 3º ANDAR -->
+                <section id="andar3" class="screen" aria-label="Terceiro andar">
+                    <h2>3º Andar</h2>
+                    <p>Você pode encontrar Salas de aula e Auditório.</p>
+                    <div class="location-options">
+                        <button type="button" class="location-card" data-location="sala de aula">Sala de Aula</button>
+                        <button type="button" class="location-card" data-location="auditório">Auditório</button>
+                    </div>
+
+                    <!-- LINHA ESPECÍFICA PARA VÍDEO MP4 -->
+                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
+                        <button type="button" class="location-card" data-location="vídeo 3° andar" style="width: 100%; background-color: var(--brand-dark);">Assistir Vídeo MP4 do 3º Andar</button>
+                    </div>
+
+                    <button type="button" class="secondary-btn" data-target="mapa">Voltar ao Mapa</button>
+                </section>
+
+                <!-- VÍDEOS -->
+                <section id="video" class="screen" aria-label="Informações do Local selecionado">
+                    <h2 id="video-titulo-local">Vídeos e Imagens</h2>
+                    <p id="video-subtitulo-local">Siga as instruções nas imagens ou no vídeo para chegar ao seu destino.</p>
+                    
+                    <div class="media-gallery">
+                        <div class="media-item" id="video-thumb-container" tabindex="0" role="button" aria-label="Assistir vídeo do local">
+                            <img id="video-thumb" src="https://placehold.co/300x200/f3c06d/white?text=Capa+do+Video" alt="Miniatura">
+                            <p id="video-desc">Navegação</p>
+                        </div>
+
+                        <div class="media-item media-video-item">
+                            <!-- O conteúdo de vídeo ou imagem será injetado aqui pelo JS -->
+                        </div>
+                    </div>
+                    <button type="button" class="secondary-btn" id="btn-voltar-andar" style="margin-top: 20px;">Voltar ao Andar Anterior</button>
+                </section>
+            </main>        
+            
+            <footer class="footer">
+                <p>RF4: Compatível com WiFi, 4G, 5G e LTE</p>
+                <p>RF5: Funcionamento em Rede Local/localhost</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- MODAL DE IMAGEM -->
+    <div id="image-modal" class="image-modal" aria-hidden="true">
+        <span class="close-modal" id="close-modal" aria-label="Fechar imagem">&times;</span>
+        <img class="modal-content" id="expanded-image" alt="Imagem expandida">
+    </div>
+
+    <audio id="audio-talkback" preload="auto" src="assets/audio/audio_talkback.mp3"></audio>
+    <script src="script.js"></script>
+</body>
+</html>
